@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Order</title>
+</head>
+<body>
+<h2>Đặt món nhanh</h2>
+
+<form th:action="@{/bai5/order}" method="post">
+    <label>Chọn món:</label>
+    <select name="dishId">
+        <option th:each="dish : ${dishes}"
+                th:value="${dish.id}"
+                th:text="${dish.name} + ' - ' + ${dish.price}"></option>
+    </select><br/>
+
+    <label>Số lượng:</label>
+    <input type="number" name="quantity" value="1"/><br/>
+
+    <button type="submit">Đặt món</button>
+</form>
+
+<p th:text="${message}">Thông báo mẫu: Đặt món thành công!</p>
+<p th:text="${errorMessage}"></p>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách món ăn</title>
+    <style>
+        .out-of-stock { color: red; font-weight: bold; }
+        .in-stock { color: green; }
+    </style>
+</head>
+<body>
+<h2>Thực đơn nhà hàng</h2>
+
+<div th:if="${#lists.isEmpty(dishes)}">
+    Hiện tại nhà hàng đang cập nhật thực đơn, vui lòng quay lại sau
+</div>
+
+<table border="1" th:if="${!#lists.isEmpty(dishes)}">
+    <tr>
+        <th>ID</th>
+        <th>Tên món</th>
+        <th>Giá</th>
+        <th>Trạng thái</th>
+    </tr>
+    <tr th:each="dish : ${dishes}">
+        <td th:text="${dish.id}"></td>
+        <td th:text="${dish.name}"></td>
+        <td th:text="${dish.price}"></td>
+        <td th:classappend="${dish.isAvailable} ? 'in-stock' : 'out-of-stock'"
+            th:text="${dish.isAvailable} ? 'Còn hàng' : 'Hết hàng'">
+        </td>
+        <a th:href="@{|/bai3/edit/${dish.id}|}">Chỉnh sửa</a>
+    </tr>
+</table>
+
+</body>
+</html>
